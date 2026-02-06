@@ -21,5 +21,11 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       tsconfigPaths(),
     ],
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: './src/test/setup.ts',
+      css: true,
+    },
   }
 })
