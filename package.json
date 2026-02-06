@@ -1,15 +1,20 @@
 {
-  "name": "vrt-starter-r1",
-  "version": "1.0.0",
-  "description": "Vite 7 + React 19 + Tailwind 4 Starter Template",
+  "name": "vrt-todo-r2",
+  "version": "0.0.0",
+  "description": "Nook Exchange themed Todo App with comprehensive QA testing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "release": "standard-version"
   },
   "keywords": [],
   "author": "",
@@ -18,26 +23,39 @@
   "type": "module",
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@playwright/test": "^1.58.1",
     "@stylistic/eslint-plugin": "^5.6.1",
     "@tailwindcss/vite": "^4.0.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/ui": "^4.0.18",
+    "axe-playwright": "^2.2.2",
     "eslint": "9",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.26",
     "globals": "^17.0.0",
+    "jsdom": "^28.0.0",
+    "standard-version": "^9.5.0",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.52.0",
     "vite": "^7.3.1",
-    "vite-tsconfig-paths": "^6.0.3"
+    "vite-tsconfig-paths": "^6.0.3",
+    "vitest": "^4.0.18"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^18.0.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "idb": "^8.0.3",
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-router-dom": "^7.12.0"
+    "react-router-dom": "^7.12.0",
+    "zustand": "^5.0.11"
   }
 }
