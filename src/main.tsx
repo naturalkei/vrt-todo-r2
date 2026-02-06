@@ -8,7 +8,7 @@ import App from './App'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {/* Vite Config의 base 값이 자동으로 적용됩니다 */}
+    {/* The base value from Vite Config is automatically applied */}
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <App />
     </BrowserRouter>

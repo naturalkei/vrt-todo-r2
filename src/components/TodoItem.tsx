@@ -1,7 +1,7 @@
 import { Check, GripVertical, Pencil, Trash2, X } from 'lucide-react'
 import { useState } from 'react'
 import { format } from 'date-fns'
-import { ko } from 'date-fns/locale'
+import { enUS } from 'date-fns/locale'
 import { type DraggableProvidedDragHandleProps } from '@hello-pangea/dnd'
 import { type Todo } from '../lib/db'
 import clsx from 'clsx'
@@ -123,8 +123,8 @@ export default function TodoItem({
               {todo.text}
             </p>
             {todo.dueDate && (
-              <p className="mt-2 font-korean text-xs text-nook-brown" aria-label={`Due date: ${format(todo.dueDate, 'PPP', { locale: ko })}`}>
-                📅 {format(todo.dueDate, 'PPP', { locale: ko })}
+              <p className="mt-2 font-korean text-xs text-nook-brown" aria-label={`Due date: ${format(todo.dueDate, 'PPP', { locale: enUS })}`}>
+                📅 {format(todo.dueDate, 'PPP', { locale: enUS })}
               </p>
             )}
             {todo.tags && todo.tags.length > 0 && (
