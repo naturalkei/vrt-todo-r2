@@ -49,9 +49,9 @@ export default function TodoItem({
   return (
     <div
       className={clsx(
-        'group flex items-start gap-3 rounded-lg border-2 bg-white p-4 transition-all',
-        isDragging ? 'border-blue-400 shadow-lg' : 'border-gray-200 hover:border-gray-300',
-        todo.completed && 'opacity-60',
+        'group flex items-start gap-3 rounded-bubble border-4 p-4 transition-all',
+        isDragging ? 'border-nook-green shadow-glow' : todo.completed ? 'border-nook-mint-dark bg-nook-mint' : 'border-nook-yellow-dark bg-nook-yellow hover:border-nook-green-dark',
+        todo.completed && 'opacity-75',
       )}
       role="article"
       aria-label={`Todo: ${todo.text}`}
@@ -60,7 +60,7 @@ export default function TodoItem({
       <button
         {...dragHandleProps}
         type="button"
-        className="cursor-grab touch-none rounded p-1 text-gray-400 opacity-0 transition-opacity hover:bg-gray-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 group-hover:opacity-100 active:cursor-grabbing"
+        className="cursor-grab touch-none rounded-full p-1 text-nook-brown opacity-0 transition-all hover:bg-nook-brown/10 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-green group-hover:opacity-100 active:cursor-grabbing"
         aria-label="Drag to reorder todo"
       >
         <GripVertical size={20} aria-hidden="true" />
@@ -71,15 +71,15 @@ export default function TodoItem({
         type="button"
         onClick={() => onToggle(todo.id!)}
         className={clsx(
-          'mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded border-2 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500',
+          'mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-3 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-green',
           todo.completed
-            ? 'border-green-500 bg-green-500 text-white'
-            : 'border-gray-300 hover:border-green-500',
+            ? 'border-nook-green-dark bg-nook-green text-white shadow-soft'
+            : 'border-nook-brown hover:border-nook-green hover:shadow-soft',
         )}
         aria-label={todo.completed ? 'Mark as incomplete' : 'Mark as complete'}
         aria-pressed={todo.completed}
       >
-        {todo.completed && <Check size={14} aria-hidden="true" />}
+        {todo.completed && <Check size={16} aria-hidden="true" strokeWidth={3} />}
       </button>
 
       {/* Content */}
@@ -91,48 +91,48 @@ export default function TodoItem({
               value={editText}
               onChange={e => setEditText(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="flex-1 rounded border-2 border-blue-500 px-2 py-1 text-sm outline-none"
+              className="flex-1 rounded-bubble border-2 border-nook-green bg-white px-3 py-2 font-korean text-sm text-nook-brown-dark outline-none focus:shadow-glow"
               autoFocus
               aria-label="Edit todo text"
             />
             <button
               type="button"
               onClick={handleSave}
-              className="rounded bg-green-500 p-2 text-white transition-colors hover:bg-green-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
+              className="rounded-full bg-nook-green p-2 text-white transition-all hover:bg-nook-green-dark hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-green active:scale-90"
               aria-label="Save changes"
             >
-              <Check size={16} aria-hidden="true" />
+              <Check size={16} aria-hidden="true" strokeWidth={3} />
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="rounded bg-gray-500 p-2 text-white transition-colors hover:bg-gray-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500"
+              className="rounded-full bg-nook-brown p-2 text-white transition-all hover:bg-nook-brown-dark hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-brown active:scale-90"
               aria-label="Cancel editing"
             >
-              <X size={16} aria-hidden="true" />
+              <X size={16} aria-hidden="true" strokeWidth={3} />
             </button>
           </div>
         ) : (
           <>
             <p
               className={clsx(
-                'text-sm break-words',
-                todo.completed && 'text-gray-500 line-through',
+                'font-korean text-base font-medium break-words',
+                todo.completed ? 'text-nook-brown line-through opacity-75' : 'text-nook-brown-dark',
               )}
             >
               {todo.text}
             </p>
             {todo.dueDate && (
-              <p className="mt-1 text-xs text-gray-500" aria-label={`Due date: ${format(todo.dueDate, 'PPP', { locale: ko })}`}>
+              <p className="mt-2 font-korean text-xs text-nook-brown" aria-label={`Due date: ${format(todo.dueDate, 'PPP', { locale: ko })}`}>
                 📅 {format(todo.dueDate, 'PPP', { locale: ko })}
               </p>
             )}
             {todo.tags && todo.tags.length > 0 && (
-              <div className="mt-2 flex flex-wrap gap-1" role="list" aria-label="Tags">
+              <div className="mt-2 flex flex-wrap gap-1.5" role="list" aria-label="Tags">
                 {todo.tags.map(tag => (
                   <span
                     key={tag}
-                    className="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-700"
+                    className="rounded-full bg-nook-sky px-2.5 py-1 font-korean text-xs font-medium text-nook-brown-dark shadow-soft"
                     role="listitem"
                   >
                     #{tag}
@@ -150,18 +150,18 @@ export default function TodoItem({
           <button
             type="button"
             onClick={() => setIsEditing(true)}
-            className="rounded p-2 text-gray-500 transition-colors hover:bg-blue-100 hover:text-blue-600 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+            className="rounded-full bg-nook-sky p-2 text-nook-brown-dark transition-all hover:bg-nook-sky-dark hover:scale-110 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-sky active:scale-90"
             aria-label="Edit todo"
           >
-            <Pencil size={16} aria-hidden="true" />
+            <Pencil size={18} aria-hidden="true" />
           </button>
           <button
             type="button"
             onClick={() => onDelete(todo.id!)}
-            className="rounded p-2 text-gray-500 transition-colors hover:bg-red-100 hover:text-red-600 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+            className="rounded-full bg-nook-peach p-2 text-nook-brown-dark transition-all hover:bg-nook-peach-dark hover:scale-110 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-peach active:scale-90"
             aria-label="Delete todo"
           >
-            <Trash2 size={16} aria-hidden="true" />
+            <Trash2 size={18} aria-hidden="true" />
           </button>
         </div>
       )}

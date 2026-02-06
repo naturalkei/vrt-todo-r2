@@ -57,38 +57,38 @@ export default function TodoList() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+    <div className="min-h-screen p-4 md:p-8">
       <div className="mx-auto max-w-3xl">
         {/* Header */}
-        <header className="mb-8">
-          <h1 className="mb-2 text-3xl font-bold text-gray-900">
-            Todo List
+        <header className="mb-8 rounded-bubbly border-4 border-nook-brown-dark bg-nook-cream p-6 shadow-bubble">
+          <h1 className="mb-2 font-bubbly text-4xl font-bold text-nook-brown-dark">
+            🍃 Todo List
           </h1>
-          <p className="text-sm text-gray-600">
-            Manage your tasks efficiently
+          <p className="font-korean text-sm text-nook-brown">
+            하루 일정을 관리해보세요!
           </p>
         </header>
 
         {/* Add Todo Form */}
         <form onSubmit={handleAddTodo} className="mb-6">
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <input
               type="text"
               value={newTodoText}
               onChange={e => setNewTodoText(e.target.value)}
-              placeholder="What needs to be done?"
-              className="flex-1 rounded-lg border-2 border-gray-300 px-4 py-3 text-sm outline-none transition-colors focus:border-blue-500"
+              placeholder="새로운 할 일을 입력하세요..."
+              className="flex-1 rounded-bubble border-4 border-nook-mint-dark bg-white px-6 py-4 font-korean text-lg text-nook-brown-dark outline-none transition-all placeholder:text-nook-brown/50 focus:border-nook-green focus:shadow-glow"
               disabled={isLoading}
               aria-label="New todo text"
             />
             <button
               type="submit"
               disabled={isLoading || !newTodoText.trim()}
-              className="flex items-center gap-2 rounded-lg bg-blue-500 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex items-center gap-2 rounded-bubble border-4 border-nook-green-dark bg-nook-green px-8 py-4 font-bubbly font-bold text-white shadow-soft transition-all hover:scale-105 hover:bg-nook-green-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-green disabled:cursor-not-allowed disabled:opacity-50 active:scale-95"
               aria-label="Add new todo"
             >
-              <Plus size={20} aria-hidden="true" />
-              <span className="hidden sm:inline">Add</span>
+              <Plus size={24} aria-hidden="true" />
+              <span className="hidden sm:inline">추가</span>
             </button>
           </div>
         </form>
@@ -97,7 +97,7 @@ export default function TodoList() {
         {error && (
           <div
             role="alert"
-            className="mb-4 rounded-lg border-2 border-red-200 bg-red-50 p-4 text-sm text-red-700"
+            className="mb-4 rounded-bubble border-4 border-nook-peach-dark bg-nook-peach p-4 font-korean text-sm text-nook-brown-dark shadow-soft"
           >
             ⚠️ {error}
           </div>
@@ -111,7 +111,7 @@ export default function TodoList() {
             placeholder="Search todos..."
           />
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             <div
               role="group"
               aria-label="Filter todos"
@@ -122,14 +122,14 @@ export default function TodoList() {
                   key={f}
                   type="button"
                   onClick={() => setFilter(f)}
-                  className={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${
+                  className={`rounded-bubble border-2 px-4 py-2 font-korean text-sm font-medium capitalize transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-green ${
                     filter === f
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-white text-gray-700 hover:bg-gray-100'
+                      ? 'border-nook-green bg-nook-green text-white shadow-soft'
+                      : 'border-nook-cream-dark bg-white text-nook-brown hover:border-nook-mint'
                   }`}
                   aria-pressed={filter === f}
                 >
-                  {f}
+                  {f === 'all' ? '전체' : f === 'active' ? '진행중' : '완료'}
                 </button>
               ))}
             </div>
@@ -138,21 +138,23 @@ export default function TodoList() {
               <button
                 type="button"
                 onClick={clearAllTodos}
-                className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+                className="flex items-center gap-2 rounded-bubble border-4 border-nook-brown bg-nook-brown-dark px-4 py-2 font-bubbly text-sm font-bold text-nook-cream shadow-soft transition-all hover:scale-105 hover:bg-nook-brown focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-brown active:scale-95"
                 aria-label="Clear all todos"
               >
                 <Trash2 size={16} aria-hidden="true" />
-                <span className="hidden sm:inline">Clear All</span>
+                <span className="hidden sm:inline">전체삭제</span>
               </button>
             )}
           </div>
         </div>
 
         {/* Stats */}
-        <div className="mb-4 flex gap-4 text-sm text-gray-600" role="status" aria-live="polite">
-          <span>Total: <strong>{stats.total}</strong></span>
-          <span>Active: <strong>{stats.active}</strong></span>
-          <span>Completed: <strong>{stats.completed}</strong></span>
+        <div className="mb-4 rounded-bubble border-4 border-nook-cream-dark bg-white/80 p-4 shadow-soft" role="status" aria-live="polite">
+          <div className="flex justify-center gap-6 font-korean text-sm text-nook-brown">
+            <span>전체 <strong className="text-nook-brown-dark">{stats.total}</strong></span>
+            <span>진행중 <strong className="text-nook-yellow-dark">{stats.active}</strong></span>
+            <span>완료 <strong className="text-nook-green">{stats.completed}</strong></span>
+          </div>
         </div>
 
         {/* Todo List */}
@@ -169,15 +171,15 @@ export default function TodoList() {
                 aria-label="Todo items"
               >
                 {filteredTodos.length === 0 ? (
-                  <div className="rounded-lg border-2 border-dashed border-gray-300 bg-white p-12 text-center">
-                    <p className="text-gray-500">
+                  <div className="rounded-bubbly border-4 border-dashed border-nook-cream-dark bg-white p-12 text-center shadow-soft">
+                    <p className="font-korean text-lg text-nook-brown">
                       {searchQuery
-                        ? 'No todos found matching your search.'
+                        ? '🔍 검색 결과가 없습니다.'
                         : filter === 'completed'
-                          ? 'No completed todos yet.'
+                          ? '✅ 완료된 할 일이 없습니다.'
                           : filter === 'active'
-                            ? 'No active todos. Add one above!'
-                            : 'No todos yet. Add your first one above!'}
+                            ? '📝 진행중인 할 일이 없습니다!'
+                            : '🌸 할 일을 추가해보세요!'}
                     </p>
                   </div>
                 ) : (

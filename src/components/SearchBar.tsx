@@ -12,13 +12,13 @@ export default function SearchBar({ value, onChange, placeholder = 'Search todos
 
   return (
     <div
-      className={`relative flex items-center gap-2 rounded-lg border-2 bg-white px-4 py-2 transition-colors ${
-        isFocused ? 'border-blue-500' : 'border-gray-300'
+      className={`relative flex items-center gap-3 rounded-bubble border-4 bg-white px-5 py-3 shadow-soft transition-all ${
+        isFocused ? 'border-nook-green shadow-glow' : 'border-nook-cream-dark'
       }`}
     >
       <Search
-        size={20}
-        className="text-gray-400"
+        size={22}
+        className="text-nook-brown"
         aria-hidden="true"
       />
       <input
@@ -28,17 +28,17 @@ export default function SearchBar({ value, onChange, placeholder = 'Search todos
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder={placeholder}
-        className="flex-1 bg-transparent text-sm outline-none placeholder:text-gray-400"
+        className="flex-1 bg-transparent font-korean text-sm text-nook-brown-dark outline-none placeholder:text-nook-brown/50"
         aria-label="Search todos"
       />
       {value && (
         <button
           type="button"
           onClick={() => onChange('')}
-          className="rounded-full p-1 transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+          className="rounded-full bg-nook-peach p-1.5 transition-all hover:bg-nook-peach-dark hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nook-peach active:scale-90"
           aria-label="Clear search"
         >
-          <X size={16} className="text-gray-400" aria-hidden="true" />
+          <X size={16} className="text-nook-brown-dark" aria-hidden="true" strokeWidth={3} />
         </button>
       )}
     </div>
